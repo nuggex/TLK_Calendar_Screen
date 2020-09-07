@@ -1,0 +1,25 @@
+{
+  "name": "calendar_screen",
+  "version": "1.0.0",
+  "description": "Calendar scren",
+  "main": "new_main.js",
+  "dependencies": {
+    "http": "0.0.1-security",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nuggex/Calendar_Screen.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nuggex/Calendar_Screen/issues"
+  },
+  "homepage": "https://github.com/nuggex/Calendar_Screen#readme"
+}
