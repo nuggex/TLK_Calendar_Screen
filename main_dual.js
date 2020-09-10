@@ -125,9 +125,10 @@ Promise.all(events, events2).then(values => {
                             events[1].name + "</h2><h3>" +
                             upStart.toDateString() + "</h3><h3>" +
                             upTime + " - " + upEndTime + "</h3>";
-                    } else if (!isNow) todayDiv.append(eventDiv);
+                    } 
+                    if (!isNow) todayDiv.append(eventDiv);
                 }
-                if (events[i].startTime > now.getTime()) {
+                else if (events[i].startTime > now.getTime()) {
                     nextDiv.append(eventDiv);
                 }
             }
