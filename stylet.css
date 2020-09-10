@@ -147,7 +147,8 @@ margin: 0}
     background-color: skyblue;
 	transform: scale(1.2);	
     filter: drop-shadow(0 0 0.75rem skyblue);
-    margin-left: 35em
+    margin-left: 35em;
+    margin-right: -2em;
 }
 #futureEvent{
     
