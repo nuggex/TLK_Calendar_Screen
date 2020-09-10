@@ -19,8 +19,9 @@ body{
     background-image: url("Flag_logo_1920_1200.png");
 	background-size: contain;
 	background-repeat: no-repeat;
-	background-position: center;
+    background-position: center;
 }
+
 
 #private{
     display: flex;
@@ -145,8 +146,20 @@ margin: 0}
     padding: 20px;
     background-color: skyblue;
 	transform: scale(1.2);	
-	filter: drop-shadow(0 0 0.75rem skyblue);
+    filter: drop-shadow(0 0 0.75rem skyblue);
+    margin-left: 35em
 }
+#futureEvent{
+    
+    border: 1px solid rgba(0,0,255,.4);
+	border-radius: 10px;
+    padding: 20px;
+    background-color: blue;
+	transform: scale(1.2);	
+    filter: drop-shadow(0 0 0.75rem blueviolet);
+    margin-left: 0em;
+}
+
 
 #nextEvent{
     position: fixed;
