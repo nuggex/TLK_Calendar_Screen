@@ -1,6 +1,3 @@
-
-
-
 // update every 5minutes // 
 window.onload = d => {
     setTimeout(s => {
