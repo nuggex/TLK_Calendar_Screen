@@ -9,6 +9,7 @@ window.onload = d => {
 
 const body = document.getElementById("thepage");
 
+getSauna();
 
 let todayDiv = document.createElement("div");
 todayDiv.id = "today";
@@ -37,6 +38,7 @@ Promise.all(events, events2).then(values => {
     fetch("http://127.0.0.1:3000") // SET TO CORRECT IP!
         .then((resp) => resp.json())
         .then((data) => {
+            console.log(data);
             for (let i of data.items) {
                 let startTime = new Date(i.start.dateTime).getTime();
                 let endTime = new Date(i.end.dateTime).getTime();
@@ -91,12 +93,21 @@ Promise.all(events, events2).then(values => {
                 header.innerHTML = events[i].name;
 
                 let para = document.createElement("p");
-                para.innerHTML =
-                    startDay.toDateString() +
-                    "<br> " +
-                    newStarTime +
-                    " - " +
-                    newEndTime;
+                if (startDay.getDay() == endDay.getDay()) {
+                    para.innerHTML =
+                        startDay.toDateString() +
+                        "<br> " +
+                        newStarTime +
+                        " - " +
+                        newEndTime;
+                } else {
+                    para.innerHTML =
+                        startDay.getDate() + " - " + endDay.getDate() + "." + (endDay.getMonth() + 1) +
+                        "<br> " +
+                        newStarTime +
+                        " - " +
+                        newEndTime;
+                }
                 eventDiv.append(header);
                 eventDiv.append(para);
 
@@ -122,7 +133,7 @@ Promise.all(events, events2).then(values => {
                             events[1].name + "</h2><h3>" +
                             upStart.toDateString() + "</h3><h3>" +
                             upTime + " - " + upEndTime + "</h3>";
-                    } 
+                    }
                     if (!isNow) todayDiv.append(eventDiv);
                 }
                 else if (events[i].startTime > now.getTime()) {
@@ -216,3 +227,35 @@ function getTimePadding(inTime) {
     padTime = padTime.slice(0, 2) + ":" + padTime.slice(2, 4);
     return padTime;
 }
+
+
+
+
+console.log("sauna");
+
+
+function getSauna() {
+
+    console.log("asdasd");
+    Date.prototype.getWeek = function () {
+        var onejan = new Date(this.getFullYear(), 0, 1);
+        var today = new Date(this.getFullYear(), this.getMonth(), this.getDate());
+        var dayOfYear = ((today - onejan + 86400000) / 86400000);
+        return Math.ceil(dayOfYear / 7)
+    };
+
+    let week = new Date().getWeek();
+    let rest;
+    if (week % 2 == 0) {
+        rest = "This week House Sauna for Men || Roof Sauna for Women";
+    } else {
+        rest = "This week Roof Sauna for Men || House Sauna for Women"
+    }
+    let span = document.createElement("span");
+    span.classList.add("marquee-parent");
+    span.innerHTML = '<strong class="marquee-child">' + rest + '</strong>';
+    document.body.insertBefore(span, document.body.firstChild);
+
+}
+
+
