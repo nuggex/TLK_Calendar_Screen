@@ -243,13 +243,25 @@ function getSauna() {
         var dayOfYear = ((today - onejan + 86400000) / 86400000);
         return Math.ceil(dayOfYear / 7)
     };
+    let thisweek = new Date();
+    let house = "This week House Sauna for Men & Roof Sauna for Women";
+    let roof = "This week Roof Sauna for Men & House Sauna for Women";
+    let week = thisweek.getWeek()+1;
+    let day = thisweek.getDay();
 
-    let week = new Date().getWeek();
     let rest;
     if (week % 2 == 0) {
-        rest = "This week House Sauna for Men || Roof Sauna for Women";
+        if (day < 5) {
+            rest = house;
+        } else {
+            rest = "Next week Roof Sauna for Men & House Sauna for Women"
+        }
     } else {
-        rest = "This week Roof Sauna for Men || House Sauna for Women"
+        if (day < 5) {
+            rest = roof;
+        }else{
+        rest = "Next week House Sauna for Men & Roof Sauna for Women";
+        }
     }
     let span = document.createElement("span");
     span.classList.add("marquee-parent");
