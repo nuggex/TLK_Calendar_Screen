@@ -231,9 +231,6 @@ function getTimePadding(inTime) {
 
 
 
-console.log("sauna");
-
-
 function getSauna() {
 
     console.log("asdasd");
@@ -246,21 +243,22 @@ function getSauna() {
     let thisweek = new Date();
     let house = "This week House Sauna for Men & Roof Sauna for Women";
     let roof = "This week Roof Sauna for Men & House Sauna for Women";
-    let week = thisweek.getWeek()+1;
+    let week = thisweek.getWeek();
     let day = thisweek.getDay();
-
     let rest;
+    console.log(week);
+    console.log(day);
     if (week % 2 == 0) {
-        if (day < 5) {
-            rest = house;
+        if (day == 0 || day == 5 || day ==6) {
+            rest = "Next week Roof Sauna for Men & House Sauna for Women";
         } else {
-            rest = "Next week Roof Sauna for Men & House Sauna for Women"
+            rest = house;
         }
     } else {
-        if (day < 5) {
-            rest = roof;
+        if (day == 0 || day == 5 || day ==6)  {
+            rest = "Next week House Sauna for Men & Roof Sauna for Women";
         }else{
-        rest = "Next week House Sauna for Men & Roof Sauna for Women";
+        rest = roof;
         }
     }
     let span = document.createElement("span");
