@@ -3,13 +3,13 @@ window.onload = d => {
     setTimeout(s => {
         location.reload();
     }, 300000);
-}
+};
 
 // Create parent divs //
 
 const body = document.getElementById("thepage");
 
-getSauna();
+renderSauna();
 
 let todayDiv = document.createElement("div");
 todayDiv.id = "today";
@@ -227,12 +227,16 @@ function getTimePadding(inTime) {
 
 
 
+function renderSauna() {
+    let span = document.createElement("span");
+    span.classList.add("marquee-parent");
+    span.innerHTML = '<strong class="marquee-child">' + getSauna() + '</strong>';
+    document.body.insertBefore(span, document.body.firstChild);
+}
 
-function getSauna() {
-
-    console.log("asdasd");
+function getSauna(){
     Date.prototype.getWeek = function() {
-        var date = new Date(this.getTime());
+       var date = new Date(this.getTime());
         date.setHours(0, 0, 0, 0);
         // Thursday in current week decides the year.
         date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
@@ -242,32 +246,22 @@ function getSauna() {
         return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
                               - 3 + (week1.getDay() + 6) % 7) / 7);
       };
-    let thisweek = new Date();
-    let house = "This week House Sauna for Men & Roof Sauna for Women";
-    let roof = "This week Roof Sauna for Men & House Sauna for Women";
-    let week = thisweek.getWeek();
-    let day = thisweek.getDay();
-    let rest;
-    console.log(week);
-    console.log(day);
+
+    let today = new Date();
+    let week = today.getWeek();
+    let day = today.getDay();
+
     if (week % 2 == 0) {
         if (day == 0 || day == 5 || day ==6) {
-            rest = "Next week Roof Sauna for Men & House Sauna for Women";
+            return "Next week Roof Sauna for Men & House Sauna for Women";
         } else {
-            rest = house;
+            return "This week House Sauna for Men & Roof Sauna for Women";
         }
     } else {
         if (day == 0 || day == 5 || day ==6)  {
-            rest = "Next week House Sauna for Men & Roof Sauna for Women";
+            return "Next week House Sauna for Men & Roof Sauna for Women";
         } else {
-        rest = roof;
+            return "This week Roof Sauna for Men & House Sauna for Women";
         }
     }
-    let span = document.createElement("span");
-    span.classList.add("marquee-parent");
-    span.innerHTML = '<strong class="marquee-child">' + rest + '</strong>';
-    document.body.insertBefore(span, document.body.firstChild);
-
 }
-
-
