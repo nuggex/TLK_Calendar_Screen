@@ -1,15 +1,15 @@
-// update every 5minutes // 
+// update every 5minutes //
 window.onload = d => {
     setTimeout(s => {
         location.reload();
-    }, 300000)
-}
+    }, 300000);
+};
 
-// Create parent divs // 
+// Create parent divs //
 
 const body = document.getElementById("thepage");
 
-getSauna();
+renderSauna();
 
 let todayDiv = document.createElement("div");
 todayDiv.id = "today";
@@ -28,11 +28,11 @@ nextEvent.id = "futureEvent";
 nextEvent.innerHTML = "<h1>Events</h1>";
 
 
-// arrays for calendar items // 
+// arrays for calendar items //
 let events = [];
 let events2 = [];
 
-// Start promise // 
+// Start promise //
 
 Promise.all(events, events2).then(values => {
     fetch("http://127.0.0.1:3000") // SET TO CORRECT IP!
@@ -141,17 +141,14 @@ Promise.all(events, events2).then(values => {
                 }
             }
             if (todayDiv.innerHTML == "<h1>Today @ Corner</h1>") {
-                todayDiv.append("No events today :/")
+                todayDiv.append("No events today :/");
             }
         });
 
 
     /*
-    
     The following code is shit and probably not how things should be done but it works
     repeating code sux.
-    
-    
     */
 
 
@@ -180,8 +177,8 @@ Promise.all(events, events2).then(values => {
                 let aStart = a.startTime;
                 let bStart = b.startTime;
                 let comp = 0;
-                if (aStart > bStart) { comp = 1 }
-                else if (aStart < bStart) { comp = -1 };
+                if (aStart > bStart) { comp = 1; }
+                else if (aStart < bStart) { comp = -1; };
                 return comp;
             }
             events2.sort(compare);
@@ -214,7 +211,7 @@ Promise.all(events, events2).then(values => {
         });
 });
 
-// Append everything to parent divs // 
+// Append everything to parent divs //
 body.append(todayDiv);
 body.append(nextDiv);
 body.append(nextEvent);
@@ -230,12 +227,16 @@ function getTimePadding(inTime) {
 
 
 
+function renderSauna() {
+    let span = document.createElement("span");
+    span.classList.add("marquee-parent");
+    span.innerHTML = '<strong class="marquee-child">' + getSauna() + '</strong>';
+    document.body.insertBefore(span, document.body.firstChild);
+}
 
-function getSauna() {
-
-    console.log("asdasd");
+function getSauna(){
     Date.prototype.getWeek = function() {
-        var date = new Date(this.getTime());
+       var date = new Date(this.getTime());
         date.setHours(0, 0, 0, 0);
         // Thursday in current week decides the year.
         date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
@@ -245,32 +246,22 @@ function getSauna() {
         return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
                               - 3 + (week1.getDay() + 6) % 7) / 7);
       };
-    let thisweek = new Date();
-    let house = "This week House Sauna for Men & Roof Sauna for Women";
-    let roof = "This week Roof Sauna for Men & House Sauna for Women";
-    let week = thisweek.getWeek();
-    let day = thisweek.getDay();
-    let rest;
-    console.log(week);
-    console.log(day);
+
+    let today = new Date();
+    let week = today.getWeek();
+    let day = today.getDay();
+
     if (week % 2 == 0) {
         if (day == 0 || day == 5 || day ==6) {
-            rest = "Next week Roof Sauna for Men & House Sauna for Women";
+            return "Next week Roof Sauna for Men & House Sauna for Women";
         } else {
-            rest = house;
+            return "This week House Sauna for Men & Roof Sauna for Women";
         }
     } else {
         if (day == 0 || day == 5 || day ==6)  {
-            rest = "Next week House Sauna for Men & Roof Sauna for Women";
-        }else{
-        rest = roof;
+            return "Next week House Sauna for Men & Roof Sauna for Women";
+        } else {
+            return "This week Roof Sauna for Men & House Sauna for Women";
         }
     }
-    let span = document.createElement("span");
-    span.classList.add("marquee-parent");
-    span.innerHTML = '<strong class="marquee-child">' + rest + '</strong>';
-    document.body.insertBefore(span, document.body.firstChild);
-
 }
-
-
