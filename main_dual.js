@@ -221,34 +221,30 @@ function renderSauna() {
     document.body.insertBefore(span, document.body.firstChild);
 }
 
-function getSauna(){
+function getSauna() {
     Date.prototype.getWeek = function() {
-       var date = new Date(this.getTime());
+        var date = new Date(this.getTime());
         date.setHours(0, 0, 0, 0);
         // Thursday in current week decides the year.
         date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
         // January 4 is always in week 1.
         var week1 = new Date(date.getFullYear(), 0, 4);
         // Adjust to Thursday in week 1 and count number of weeks from date to week1.
-        return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
-                              - 3 + (week1.getDay() + 6) % 7) / 7);
-      };
+        return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+    };
 
     let today = new Date();
-    let week = today.getWeek();
     let day = today.getDay();
+    let isEvenWeek = ( today.getWeek() % 2 == 0 );
+    let isBeforeThursday = ( day > 0 && day < 5 ); // Day is between Sunday(0) and Friday(5)
 
-    if (week % 2 == 0) {
-        if (day == 0 || day == 5 || day ==6) {
-            return "Next week Roof Sauna for Men & House Sauna for Women";
-        } else {
-            return "This week House Sauna for Men & Roof Sauna for Women";
-        }
+    if ( isEvenWeek ) {
+        return isBeforeThursday
+            ? "This week House Sauna for Men & Roof Sauna for Women"
+            : "Next week Roof Sauna for Men & House Sauna for Women";
     } else {
-        if (day == 0 || day == 5 || day ==6)  {
-            return "Next week House Sauna for Men & Roof Sauna for Women";
-        } else {
-            return "This week Roof Sauna for Men & House Sauna for Women";
-        }
+        return isBeforeThursday
+            ? "This week Roof Sauna for Men & House Sauna for Women"
+            : "Next week House Sauna for Men & Roof Sauna for Women";
     }
 }
