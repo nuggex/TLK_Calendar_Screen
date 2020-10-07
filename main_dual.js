@@ -32,6 +32,11 @@ nextEvent.innerHTML = "<h1>Events</h1>";
 let events = [];
 let events2 = [];
 
+// compare function for sorting array of events by time
+let compare = function (a, b) {
+    return a.startTime - b.startTime;
+};
+
 // Start promise //
 
 Promise.all(events, events2).then(values => {
@@ -61,15 +66,6 @@ Promise.all(events, events2).then(values => {
             }
         })
         .then(() => {
-            // Sort array
-            function compare(a, b) {
-                let aStart = a.startTime;
-                let bStart = b.startTime;
-                let comp = 0;
-                if (aStart > bStart) { comp = 1 }
-                else if (aStart < bStart) { comp = -1 }
-                return comp;
-            }
             events.sort(compare);
             const now = new Date();
 
@@ -172,15 +168,6 @@ Promise.all(events, events2).then(values => {
             }
         })
         .then(() => {
-            // Sort array
-            function compare(a, b) {
-                let aStart = a.startTime;
-                let bStart = b.startTime;
-                let comp = 0;
-                if (aStart > bStart) { comp = 1; }
-                else if (aStart < bStart) { comp = -1; };
-                return comp;
-            }
             events2.sort(compare);
 
             for (let i = 0; i < 4; i++) {
