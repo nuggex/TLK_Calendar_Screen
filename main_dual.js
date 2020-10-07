@@ -1,11 +1,11 @@
-// update every 5minutes // 
+// update every 5minutes //
 window.onload = d => {
     setTimeout(s => {
         location.reload();
-    }, 300000)
+    }, 300000);
 }
 
-// Create parent divs // 
+// Create parent divs //
 
 const body = document.getElementById("thepage");
 
@@ -28,11 +28,11 @@ nextEvent.id = "futureEvent";
 nextEvent.innerHTML = "<h1>Events</h1>";
 
 
-// arrays for calendar items // 
+// arrays for calendar items //
 let events = [];
 let events2 = [];
 
-// Start promise // 
+// Start promise //
 
 Promise.all(events, events2).then(values => {
     fetch("http://127.0.0.1:3000") // SET TO CORRECT IP!
@@ -141,17 +141,14 @@ Promise.all(events, events2).then(values => {
                 }
             }
             if (todayDiv.innerHTML == "<h1>Today @ Corner</h1>") {
-                todayDiv.append("No events today :/")
+                todayDiv.append("No events today :/");
             }
         });
 
 
     /*
-    
     The following code is shit and probably not how things should be done but it works
     repeating code sux.
-    
-    
     */
 
 
@@ -180,8 +177,8 @@ Promise.all(events, events2).then(values => {
                 let aStart = a.startTime;
                 let bStart = b.startTime;
                 let comp = 0;
-                if (aStart > bStart) { comp = 1 }
-                else if (aStart < bStart) { comp = -1 };
+                if (aStart > bStart) { comp = 1; }
+                else if (aStart < bStart) { comp = -1; };
                 return comp;
             }
             events2.sort(compare);
@@ -214,7 +211,7 @@ Promise.all(events, events2).then(values => {
         });
 });
 
-// Append everything to parent divs // 
+// Append everything to parent divs //
 body.append(todayDiv);
 body.append(nextDiv);
 body.append(nextEvent);
@@ -262,7 +259,7 @@ function getSauna() {
     } else {
         if (day == 0 || day == 5 || day ==6)  {
             rest = "Next week House Sauna for Men & Roof Sauna for Women";
-        }else{
+        } else {
         rest = roof;
         }
     }
